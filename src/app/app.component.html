@@ -1,1 +1,33 @@
-<router-outlet />
+<app-navbar (notify)="drawer.toggle()"></app-navbar>
+
+<mat-drawer-container class="container">
+  <mat-drawer #drawer [mode]="'over'">
+    <button mat-menu-item>
+      <mat-icon>person</mat-icon>
+      <span>Usuarios</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>business_center</mat-icon>
+      <span>Clientes</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>storefront</mat-icon>
+      <span>Proveedores</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>receipt_long</mat-icon>
+      <span>Facturas</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>inventory_2</mat-icon>
+      <span>Productos</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>sell</mat-icon>
+      <span>Categorías</span>
+    </button>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
