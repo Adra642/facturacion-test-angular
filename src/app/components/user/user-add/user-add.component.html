@@ -82,9 +82,11 @@
       Registrar
     </button>
 
-    <button mat-fab extended [attr.aria-label]="'Cancelar registro'">
-      <mat-icon>close</mat-icon>
-      Cancelar
-    </button>
+    <a routerLink="/user/index">
+      <button ngNoForm mat-fab extended [attr.aria-label]="'Cancelar registro'">
+        <mat-icon>close</mat-icon>
+        Cancelar
+      </button>
+    </a>
   </div>
 </form>

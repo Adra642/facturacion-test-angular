@@ -2,10 +2,12 @@
 
 <mat-drawer-container class="container">
   <mat-drawer #drawer [mode]="'over'">
-    <button mat-menu-item>
-      <mat-icon>person</mat-icon>
-      <span>Usuarios</span>
-    </button>
+    <a routerLink="/user/index">
+      <button mat-menu-item>
+        <mat-icon>person</mat-icon>
+        <span>Usuarios</span>
+      </button>
+    </a>
     <button mat-menu-item>
       <mat-icon>business_center</mat-icon>
       <span>Clientes</span>

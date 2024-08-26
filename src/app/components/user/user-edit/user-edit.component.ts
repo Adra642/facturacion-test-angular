@@ -13,10 +13,10 @@ import { MatInputModule } from '@angular/material/input';
 import { Role } from '../../../interfaces/role';
 
 @Component({
-  selector: 'app-add',
+  selector: 'app-user-edit',
   standalone: true,
-  templateUrl: './add.component.html',
-  styleUrl: './add.component.css',
+  templateUrl: './user-edit.component.html',
+  styleUrl: './user-edit.component.css',
   imports: [
     FormsModule,
     MatInputModule,
@@ -27,7 +27,7 @@ import { Role } from '../../../interfaces/role';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddComponent {
+export class UserEditComponent {
   nameFormControl = new FormControl('', [
     Validators.required,
     Validators.pattern('^[a-zA-Z ]+$'),

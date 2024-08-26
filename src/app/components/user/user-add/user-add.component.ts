@@ -9,14 +9,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { RouterLink } from '@angular/router';
 
 import { Role } from '../../../interfaces/role';
 
 @Component({
-  selector: 'app-edit',
+  selector: 'app-user-add',
   standalone: true,
-  templateUrl: './edit.component.html',
-  styleUrl: './edit.component.css',
+  templateUrl: './user-add.component.html',
+  styleUrl: './user-add.component.css',
   imports: [
     FormsModule,
     MatInputModule,
@@ -24,10 +25,11 @@ import { Role } from '../../../interfaces/role';
     MatSelectModule,
     MatButtonModule,
     MatIconModule,
+    RouterLink,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EditComponent {
+export class UserAddComponent {
   nameFormControl = new FormControl('', [
     Validators.required,
     Validators.pattern('^[a-zA-Z ]+$'),

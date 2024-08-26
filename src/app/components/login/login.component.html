@@ -1,0 +1,49 @@
+<form class="login-form">
+  <h2 class="title">Iniciar Sesión</h2>
+  <mat-form-field class="full-width">
+    <mat-label>Email</mat-label>
+    <input
+      type="email"
+      matInput
+      [formControl]="emailFormControl"
+      placeholder="Ex. mail@example.com"
+    />
+    @if (emailFormControl.hasError('email') &&
+    !emailFormControl.hasError('required')) {
+    <mat-error>Please enter a valid email address</mat-error>
+    } @if (emailFormControl.hasError('required')) {
+    <mat-error>El email es requerido</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Contraseña</mat-label>
+    <input
+      matInput
+      [formControl]="passwordFormControl"
+      [type]="hide() ? 'password' : 'text'"
+    />
+    @if (passwordFormControl.hasError('required')) {
+    <mat-error>La contraseña es requerida</mat-error>
+    }
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="clickEvent($event)"
+      [attr.aria-label]="'Esconder contraseña'"
+      [attr.aria-pressed]="hide()"
+    >
+      <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <button
+    class="button"
+    mat-raised-button
+    aria-label="Iniciar Sesión"
+    (click)="login()"
+  >
+    <mat-icon>login</mat-icon>
+    Iniciar Sesión
+  </button>
+</form>

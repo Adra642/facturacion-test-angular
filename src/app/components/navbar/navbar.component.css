@@ -9,12 +9,21 @@
   justify-content: space-between;
 }
 
+.button {
+  margin: 2px;
+}
 .button:hover {
   background-color: #406cc9;
 }
 
-.text,
 .icon,
 .button {
   color: white;
+}
+
+.text {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.5rem;
 }
