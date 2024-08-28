@@ -1,1 +1,90 @@
-<p>client-add works!</p>
+<form class="add-form">
+    <h2 class="title">Registrar un nuevo cliente</h2>
+    <mat-form-field class="full-width">
+    <mat-label>Nombre</mat-label>
+    <input
+        type="text"
+        matInput
+        [formControl]="nameFormControl"
+        placeholder="Ex. John"
+    />
+        @if (nameFormControl.hasError('required')) {
+    <mat-error>El nombre es requerido</mat-error>
+    }
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+    <mat-label>Apellido</mat-label>
+    <input
+        type="text"
+        matInput
+        [formControl]="surnameFormControl"
+        placeholder="Ex. Doe"
+    />
+    @if (surnameFormControl.hasError('required')) {
+        <mat-error>El apellido es requerido</mat-error>
+    }
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+    <mat-label>Email</mat-label>
+    <input
+        type="email"
+        matInput
+        [formControl]="emailFormControl"
+        placeholder="Ex. mail@example.com"
+      />
+      @if (emailFormControl.hasError('email') &&
+      !emailFormControl.hasError('required')) {
+      <mat-error>Please enter a valid email address</mat-error>
+      } @if (emailFormControl.hasError('required')) {
+      <mat-error>El email es requerido</mat-error>
+      }
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+        <mat-label>Teléfono</mat-label>
+        <input
+          type="tel"
+          matInput
+          [formControl]="telefonoFormControl"
+          placeholder="Ex. 123-456-7890"
+        />
+        <mat-error *ngIf="telefonoFormControl.hasError('pattern')">El teléfono no es válido</mat-error>
+      </mat-form-field>
+    
+      <mat-form-field class="full-width">
+        <mat-label>Dirección</mat-label>
+        <input
+          type="text"
+          matInput
+          [formControl]="direccionFormControl"
+          placeholder="Ex. 123 Calle Principal"
+        />
+      </mat-form-field>
+    
+      <mat-form-field class="full-width">
+        <mat-label>RFC</mat-label>
+        <input
+          type="text"
+          matInput
+          [formControl]="rfcFormControl"
+          placeholder="Ex. JUPR800101HDF"
+        />
+      </mat-form-field>
+  
+    <div class="buttons">
+      <button mat-fab extended [attr.aria-label]="'Registrar usuario'">
+        <mat-icon>add</mat-icon>
+        Registrar
+      </button>
+  
+      <a routerLink="/user/index">
+        <button ngNoForm mat-fab extended [attr.aria-label]="'Cancelar registro'">
+          <mat-icon>close</mat-icon>
+          Cancelar
+        </button>
+      </a>
+    </div>
+  </form>
+  
