@@ -22,6 +22,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
+  isLoggedIn = false;
   title = 'angular-front';
   handleClick() {
     console.log('Click en el padre');
