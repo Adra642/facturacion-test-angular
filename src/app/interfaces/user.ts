@@ -1,13 +1,19 @@
 export interface User {
   id: number;
+  code?: string;
   name: string;
-  surname: string;
+  description?: string;
+  price?: number;
+  stock?:number; 
+  category?:string;
+  supplier?:string;
+  surname?: string;
   telefono?:number;
-  email: string;
+  email?: string;
   password?: string;
   role?: string;
-  creationDate: Date;
-  state: boolean;
+  creationDate?: Date;
+  state?: boolean;
   direccion?: string;
   RFC?: string;
 }

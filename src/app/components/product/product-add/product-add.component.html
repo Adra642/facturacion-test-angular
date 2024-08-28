@@ -1,0 +1,129 @@
+<form class="add-form">
+    <h2 class="title">Registrar Producto</h2>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Código</mat-label>
+      <input
+        type="text"
+        matInput
+        [formControl]="codeFormControl"
+        placeholder="Ex. ABC123"
+      />
+      <mat-error *ngIf="codeFormControl.hasError('required')">
+        El código es requerido
+      </mat-error>
+      <mat-error *ngIf="codeFormControl.hasError('pattern')">
+        El código solo puede contener letras y números
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Nombre</mat-label>
+      <input
+        type="text"
+        matInput
+        [formControl]="nameFormControl"
+        placeholder="Ex. Producto XYZ"
+      />
+      <mat-error *ngIf="nameFormControl.hasError('required')">
+        El nombre es requerido
+      </mat-error>
+      <mat-error *ngIf="nameFormControl.hasError('pattern')">
+        El nombre solo puede contener letras y espacios
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Descripción</mat-label>
+      <textarea
+        matInput
+        [formControl]="descriptionFormControl"
+        placeholder="Ex. Descripción detallada del producto"
+      ></textarea>
+      <mat-error *ngIf="descriptionFormControl.hasError('required')">
+        La descripción es requerida
+      </mat-error>
+      <mat-error *ngIf="descriptionFormControl.hasError('maxlength')">
+        La descripción no puede superar los 255 caracteres
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Precio</mat-label>
+      <input
+        type="text"
+        matInput
+        [formControl]="priceFormControl"
+        placeholder="Ex. 99.99"
+      />
+      <mat-error *ngIf="priceFormControl.hasError('required')">
+        El precio es requerido
+      </mat-error>
+      <mat-error *ngIf="priceFormControl.hasError('pattern')">
+        El precio debe ser un número válido con hasta dos decimales
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Stock</mat-label>
+      <input
+        type="text"
+        matInput
+        [formControl]="stockFormControl"
+        placeholder="Ex. 50"
+      />
+      <mat-error *ngIf="stockFormControl.hasError('required')">
+        El stock es requerido
+      </mat-error>
+      <mat-error *ngIf="stockFormControl.hasError('pattern')">
+        El stock solo puede contener números
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Categoría</mat-label>
+      <input
+        type="text"
+        matInput
+        [formControl]="categoryFormControl"
+        placeholder="Ex. Electrónica"
+      />
+      <mat-error *ngIf="categoryFormControl.hasError('required')">
+        La categoría es requerida
+      </mat-error>
+      <mat-error *ngIf="categoryFormControl.hasError('pattern')">
+        La categoría solo puede contener letras y espacios
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Proveedor</mat-label>
+      <input
+        type="text"
+        matInput
+        [formControl]="supplierFormControl"
+        placeholder="Ex. Proveedor ABC"
+      />
+      <mat-error *ngIf="supplierFormControl.hasError('required')">
+        El proveedor es requerido
+      </mat-error>
+      <mat-error *ngIf="supplierFormControl.hasError('pattern')">
+        El proveedor solo puede contener letras y espacios
+      </mat-error>
+    </mat-form-field>
+  
+    <div class="buttons">
+      <button mat-fab extended [attr.aria-label]="'Registrar producto'">
+        <mat-icon>add</mat-icon>
+        Registrar
+      </button>
+  
+      <a routerLink="/product/index">
+        <button ngNoForm mat-fab extended [attr.aria-label]="'Cancelar registro'">
+          <mat-icon>close</mat-icon>
+          Cancelar
+        </button>
+      </a>
+    </div>
+  </form>
+  

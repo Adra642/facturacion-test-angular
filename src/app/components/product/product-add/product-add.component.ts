@@ -14,10 +14,10 @@ import { RouterLink } from '@angular/router';
 import { Role } from '../../../interfaces/role';
 
 @Component({
-  selector: 'app-client-add',
+  selector: 'app-user-add',
   standalone: true,
-  templateUrl: './client-add.component.html',
-  styleUrl: './client-add.component.css',
+  templateUrl: './product-add.component.html',
+  styleUrl: './product-add.component.css',
   imports: [
     FormsModule,
     MatInputModule,
@@ -29,34 +29,46 @@ import { Role } from '../../../interfaces/role';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ClientAddComponent {
+export class ProductAddComponent {
+  idFormControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern('^[0-9]+$'),  
+  ]);
+  codeFormControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern('^[a-zA-Z0-9]+$'),  
+  ]);
   nameFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('^[a-zA-Z ]+$'),
+    Validators.pattern('^[a-zA-Z ]+$'),  
   ]);
-  surnameFormControl = new FormControl('', [
+  descriptionFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('^[a-zA-Z ]+$'),
+    Validators.maxLength(255),  
   ]);
-  emailFormControl = new FormControl('', [
+  priceFormControl = new FormControl('', [
     Validators.required,
-    Validators.email,
+    Validators.pattern('^[0-9]+(\\.[0-9]{1,2})?$'), 
   ]);
-  telefonoFormControl = new FormControl('', [
+  stockFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('^[0-9-]+$') 
+    Validators.pattern('^[0-9]+$'),  
   ]);
-  direccionFormControl = new FormControl('', [
-    Validators.required
+  categoryFormControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern('^[a-zA-Z ]+$'),  
   ]);
-  rfcFormControl = new FormControl('', [
-    Validators.required
+  supplierFormControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern('^[a-zA-Z ]+$'),  
   ]);
+
   hide = signal(true);
   clickEvent(event: MouseEvent) {
     this.hide.set(!this.hide());
     event.stopPropagation();
   }
+
   roleControl = new FormControl<Role | null>(null, Validators.required);
   roles: Role[] = [{ name: 'Administrador' }, { name: 'Vendedor' }];
 }

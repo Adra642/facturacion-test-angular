@@ -9,15 +9,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { RouterLink } from '@angular/router';
 
 import { Role } from '../../../interfaces/role';
 
 @Component({
-  selector: 'app-client-add',
+  selector: 'app-user-edit',
   standalone: true,
-  templateUrl: './client-add.component.html',
-  styleUrl: './client-add.component.css',
+  templateUrl: './product-edit.component.html',
+  styleUrl: './product-edit.component.css',
   imports: [
     FormsModule,
     MatInputModule,
@@ -25,33 +24,43 @@ import { Role } from '../../../interfaces/role';
     MatSelectModule,
     MatButtonModule,
     MatIconModule,
-    RouterLink,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ClientAddComponent {
+export class ProductEditComponent {
+  idFormControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern('^[0-9]+$'),  
+  ]);
+  codeFormControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern('^[a-zA-Z0-9]+$'),  
+  ]);
   nameFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('^[a-zA-Z ]+$'),
+    Validators.pattern('^[a-zA-Z ]+$'),  
   ]);
-  surnameFormControl = new FormControl('', [
+  descriptionFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('^[a-zA-Z ]+$'),
+    Validators.maxLength(255),  
   ]);
-  emailFormControl = new FormControl('', [
+  priceFormControl = new FormControl('', [
     Validators.required,
-    Validators.email,
+    Validators.pattern('^[0-9]+(\\.[0-9]{1,2})?$'), 
   ]);
-  telefonoFormControl = new FormControl('', [
+  stockFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('^[0-9-]+$') 
+    Validators.pattern('^[0-9]+$'),  
   ]);
-  direccionFormControl = new FormControl('', [
-    Validators.required
+  categoryFormControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern('^[a-zA-Z ]+$'),  
   ]);
-  rfcFormControl = new FormControl('', [
-    Validators.required
+  supplierFormControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern('^[a-zA-Z ]+$'),  
   ]);
+
   hide = signal(true);
   clickEvent(event: MouseEvent) {
     this.hide.set(!this.hide());

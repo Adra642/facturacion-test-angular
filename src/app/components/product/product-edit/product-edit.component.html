@@ -1,0 +1,64 @@
+<form class="edit-form">
+    <h2 class="title">Editar Producto</h2>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Nombre</mat-label>
+      <input type="text" matInput [formControl]="nameFormControl" />
+      <mat-error *ngIf="nameFormControl.hasError('required')">
+        El nombre es requerido
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput [formControl]="descriptionFormControl"></textarea>
+      <mat-error *ngIf="descriptionFormControl.hasError('required')">
+        La descripción es requerida
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Precio</mat-label>
+      <input type="number" matInput [formControl]="priceFormControl" />
+      <mat-error *ngIf="priceFormControl.hasError('required')">
+        El precio es requerido
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Stock</mat-label>
+      <input type="number" matInput [formControl]="stockFormControl" />
+      <mat-error *ngIf="stockFormControl.hasError('required')">
+        El stock es requerido
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Categoría</mat-label>
+      <input type="text" matInput [formControl]="categoryFormControl" />
+      <mat-error *ngIf="categoryFormControl.hasError('required')">
+        La categoría es requerida
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Proveedor</mat-label>
+      <input type="text" matInput [formControl]="supplierFormControl" />
+      <mat-error *ngIf="supplierFormControl.hasError('required')">
+        El proveedor es requerido
+      </mat-error>
+    </mat-form-field>
+  
+    <div class="buttons">
+      <button mat-fab extended [attr.aria-label]="'Editar producto'">
+        <mat-icon>edit</mat-icon>
+        Editar
+      </button>
+  
+      <button mat-fab extended [attr.aria-label]="'Cancelar edición'">
+        <mat-icon>close</mat-icon>
+        Cancelar
+      </button>
+    </div>
+  </form>
+  

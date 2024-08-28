@@ -1,15 +1,12 @@
-.edit-form {
+.index {
+    margin: 5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-    padding: 5rem;
   }
   
-  .full-width {
-    width: 100%;
+  .table {
+    border: 1px solid black;
   }
   
   .title {
@@ -17,7 +14,7 @@
   }
   
   .buttons {
-    display: flex;
+    margin: 3rem;
   }
   
   .buttons > * {
