@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { User } from '../../../interfaces/user';
-import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
+import { Product } from '../../../interfaces/product';
 
-const ELEMENT_DATA: User[] = [
+const ELEMENT_DATA: Product[] = [
   {
     id: 1,
     code: '001',
@@ -16,9 +17,9 @@ const ELEMENT_DATA: User[] = [
     stock: 50,
     category: 'Categoría 1',
     supplier: 'Proveedor X',
-    state: true
-},
-{
+    state: true,
+  },
+  {
     id: 2,
     code: '002',
     name: 'Producto B',
@@ -27,9 +28,9 @@ const ELEMENT_DATA: User[] = [
     stock: 30,
     category: 'Categoría 2',
     supplier: 'Proveedor Y',
-    state: true
-},
-{
+    state: true,
+  },
+  {
     id: 3,
     code: '003',
     name: 'Producto C',
@@ -38,18 +39,18 @@ const ELEMENT_DATA: User[] = [
     stock: 20,
     category: 'Categoría 3',
     supplier: 'Proveedor Z',
-    state: true
-},
-
+    state: true,
+  },
 ];
 @Component({
   selector: 'app-index',
   standalone: true,
   imports: [
-    MatTableModule,
-    MatInputModule,
-    MatIcon,
     MatButtonModule,
+    MatIcon,
+    MatInputModule,
+    MatPaginatorModule,
+    MatTableModule,
     RouterLink,
   ],
   templateUrl: './product-index.component.html',
@@ -65,13 +66,30 @@ export class ProductIndexComponent {
     'stock',
     'category',
     'supplier',
-    'state'
+    'state',
+    'actions',
   ];
-
+  headerTitles: { [key: string]: string } = {
+    id: 'Id',
+    code: 'Código',
+    name: 'Nombre',
+    description: 'Descripción',
+    price: 'Precio',
+    stock: 'Stock',
+    category: 'Categoría',
+    supplier: 'Proveedor',
+    state: 'Estado',
+    actions: 'Acciones',
+  };
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  delete(id: number) {
+    // Lógica para eliminar el registro con el ID proporcionado
+    console.log('Delete ID:', id);
   }
 }

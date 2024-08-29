@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { User } from '../../../interfaces/user';
-import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
+import { User } from '../../../interfaces/user';
 
 const ELEMENT_DATA: User[] = [
   {
@@ -42,10 +43,11 @@ const ELEMENT_DATA: User[] = [
   selector: 'app-index',
   standalone: true,
   imports: [
-    MatTableModule,
+    MatButtonModule,
     MatInputModule,
     MatIcon,
-    MatButtonModule,
+    MatPaginatorModule,
+    MatTableModule,
     RouterLink,
   ],
   templateUrl: './user-index.component.html',
@@ -61,12 +63,30 @@ export class UserIndexComponent {
     'role',
     'creationDate',
     'state',
+    'actions',
   ];
+
+  headerTitles: { [key: string]: string } = {
+    id: 'Id',
+    name: 'Nombre',
+    surname: 'Apellido',
+    email: 'Correo Electrónico',
+    password: 'Contraseña',
+    role: 'Rol',
+    creationDate: 'Fecha de Creación',
+    state: 'Estado',
+    actions: 'Acciones',
+  };
 
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  delete(id: number) {
+    // Lógica para eliminar el registro con el ID proporcionado
+    console.log('Delete ID:', id);
   }
 }

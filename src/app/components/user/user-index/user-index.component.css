@@ -20,3 +20,21 @@
 .buttons > * {
   margin: 1rem;
 }
+
+.table-options {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit {
+  color: #ffca1e;
+}
+
+.delete {
+  color: #c21414;
+}
+
+.add {
+  color: #ffffff;
+  background-color: #030370;
+}
