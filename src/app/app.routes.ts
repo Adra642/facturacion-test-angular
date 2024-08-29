@@ -4,9 +4,7 @@ import { HomeComponent } from './components/home/home.component';
 import { UserAddComponent } from './components/user/user-add/user-add.component';
 import { UserIndexComponent } from './components/user/user-index/user-index.component';
 import { UserEditComponent } from './components/user/user-edit/user-edit.component';
-import { ClientIndexComponent } from './components/client/client-index/client-index.component';
-import { ClientAddComponent } from './components/client/client-add/client-add.component';
-import { ClientEditComponent } from './components/client/client-edit/client-edit.component';
+
 import { ProductIndexComponent } from './components/product/product-index/product-index.component';
 import { ProductAddComponent } from './components/product/product-add/product-add.component';
 import { ProductEditComponent } from './components/product/product-edit/product-edit.component';
@@ -29,21 +27,7 @@ export const routes: Routes = [
     component: UserEditComponent,
     title: 'Editar Usuario',
   },
-  {
-    path: 'client/index',
-    component: ClientIndexComponent,
-    title: 'Indice de Clientes',
-  },
-  {
-    path: 'client/add',
-    component: ClientAddComponent,
-    title: 'Registrar Cliente',
-  },
-  {
-    path: 'client/edit',
-    component: ClientEditComponent,
-    title: 'Editar cliente',
-  },
+
   {
     path: 'product/index',
     component: ProductIndexComponent,
