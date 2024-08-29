@@ -9,6 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { RouterLink } from '@angular/router';
 
 import { Role } from '../../../interfaces/role';
 
@@ -24,41 +25,42 @@ import { Role } from '../../../interfaces/role';
     MatSelectModule,
     MatButtonModule,
     MatIconModule,
+    RouterLink,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductEditComponent {
   idFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('^[0-9]+$'),  
+    Validators.pattern('^[0-9]+$'),
   ]);
   codeFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('^[a-zA-Z0-9]+$'),  
+    Validators.pattern('^[a-zA-Z0-9]+$'),
   ]);
   nameFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('^[a-zA-Z ]+$'),  
+    Validators.pattern('^[a-zA-Z ]+$'),
   ]);
   descriptionFormControl = new FormControl('', [
     Validators.required,
-    Validators.maxLength(255),  
+    Validators.maxLength(255),
   ]);
   priceFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('^[0-9]+(\\.[0-9]{1,2})?$'), 
+    Validators.pattern('^[0-9]+(\\.[0-9]{1,2})?$'),
   ]);
   stockFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('^[0-9]+$'),  
+    Validators.pattern('^[0-9]+$'),
   ]);
   categoryFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('^[a-zA-Z ]+$'),  
+    Validators.pattern('^[a-zA-Z ]+$'),
   ]);
   supplierFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('^[a-zA-Z ]+$'),  
+    Validators.pattern('^[a-zA-Z ]+$'),
   ]);
 
   hide = signal(true);

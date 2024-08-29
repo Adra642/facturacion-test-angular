@@ -32,36 +32,30 @@ import { Role } from '../../../interfaces/role';
 export class ProductAddComponent {
   idFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('^[0-9]+$'),  
+    Validators.pattern('^[0-9]+$'),
   ]);
   codeFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('^[a-zA-Z0-9]+$'),  
+    Validators.pattern('^[a-zA-Z0-9]+$'),
   ]);
   nameFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('^[a-zA-Z ]+$'),  
+    Validators.pattern('^[a-zA-Z ]+$'),
   ]);
   descriptionFormControl = new FormControl('', [
     Validators.required,
-    Validators.maxLength(255),  
+    Validators.maxLength(255),
   ]);
   priceFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('^[0-9]+(\\.[0-9]{1,2})?$'), 
+    Validators.pattern('^[0-9]+(\\.[0-9]{1,2})?$'),
   ]);
   stockFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('^[0-9]+$'),  
+    Validators.pattern('^[0-9]+$'),
   ]);
-  categoryFormControl = new FormControl('', [
-    Validators.required,
-    Validators.pattern('^[a-zA-Z ]+$'),  
-  ]);
-  supplierFormControl = new FormControl('', [
-    Validators.required,
-    Validators.pattern('^[a-zA-Z ]+$'),  
-  ]);
+  categoryFormControl = new FormControl<Role | null>(null, Validators.required);
+  supplierFormControl = new FormControl<Role | null>(null, Validators.required);
 
   hide = signal(true);
   clickEvent(event: MouseEvent) {
@@ -69,6 +63,5 @@ export class ProductAddComponent {
     event.stopPropagation();
   }
 
-  roleControl = new FormControl<Role | null>(null, Validators.required);
   roles: Role[] = [{ name: 'Administrador' }, { name: 'Vendedor' }];
 }

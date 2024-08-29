@@ -2,16 +2,10 @@
 
 <mat-drawer-container class="container">
   <mat-drawer #drawer [mode]="'over'">
-    <a routerLink="/user/index">
+    <a routerLink="/categories/index">
       <button mat-button>
-        <mat-icon>person</mat-icon>
-        <span>Usuarios</span>
-      </button>
-    </a>
-    <a routerLink="/suppliers/index">
-      <button mat-button>
-        <mat-icon>storefront</mat-icon>
-        <span>Proveedores</span>
+        <mat-icon>sell</mat-icon>
+        <span>Categorías</span>
       </button>
     </a>
     <a routerLink="/invoice/index">
@@ -26,10 +20,16 @@
         <span>Productos</span>
       </button>
     </a>
-    <a routerLink="/categories/index">
+    <a routerLink="/suppliers/index">
       <button mat-button>
-        <mat-icon>sell</mat-icon>
-        <span>Categorías</span>
+        <mat-icon>storefront</mat-icon>
+        <span>Proveedores</span>
+      </button>
+    </a>
+    <a routerLink="/user/index">
+      <button mat-button>
+        <mat-icon>person</mat-icon>
+        <span>Usuarios</span>
       </button>
     </a>
   </mat-drawer>

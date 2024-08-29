@@ -20,3 +20,8 @@
 .buttons > * {
   margin: 1rem;
 }
+
+.add {
+  color: #ffffff;
+  background-color: #030370;
+}

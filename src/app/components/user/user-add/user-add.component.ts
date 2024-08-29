@@ -5,12 +5,11 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { RouterLink } from '@angular/router';
-
 import { Role } from '../../../interfaces/role';
 
 @Component({
@@ -20,11 +19,11 @@ import { Role } from '../../../interfaces/role';
   styleUrl: './user-add.component.css',
   imports: [
     FormsModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatSelectModule,
     MatButtonModule,
     MatIconModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule,
     RouterLink,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -45,7 +44,9 @@ export class UserAddComponent {
   passwordFormControl = new FormControl('', [
     Validators.required,
     Validators.min(5),
-    Validators.pattern('^[a-zA-Z ]+$'),
+    Validators.pattern(
+      '^[a-zA-Z0-9!@#$%^&*()_+\\-=\\[\\]{};\'":\\\\|,.<>\\/?]*$'
+    ),
   ]);
   hide = signal(true);
   clickEvent(event: MouseEvent) {
