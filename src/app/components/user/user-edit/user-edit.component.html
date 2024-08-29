@@ -19,9 +19,8 @@
   <mat-form-field class="full-width">
     <mat-label>Email</mat-label>
     <input type="email" matInput [formControl]="emailFormControl" />
-    @if (emailFormControl.hasError('email') &&
-    !emailFormControl.hasError('required')) {
-    <mat-error>Please enter a valid email address</mat-error>
+    @if (emailFormControl.hasError('email')) {
+    <mat-error>Ingrese una dirección de correo valida</mat-error>
     } @if (emailFormControl.hasError('required')) {
     <mat-error>El email es requerido</mat-error>
     }
@@ -62,14 +61,16 @@
   </mat-form-field>
 
   <div class="buttons">
-    <button mat-fab extended [attr.aria-label]="'Registrar usuario'">
+    <button mat-fab extended [attr.aria-label]="'Editar usuario'" class="edit">
       <mat-icon>edit</mat-icon>
       Editar
     </button>
 
-    <button mat-fab extended [attr.aria-label]="'Cancelar registro'">
-      <mat-icon>close</mat-icon>
-      Cancelar
-    </button>
+    <a routerLink="/user/index">
+      <button ngNoForm mat-fab extended [attr.aria-label]="'Cancelar registro'">
+        <mat-icon>close</mat-icon>
+        Cancelar
+      </button>
+    </a>
   </div>
 </form>

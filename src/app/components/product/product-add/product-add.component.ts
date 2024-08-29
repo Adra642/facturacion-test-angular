@@ -5,54 +5,63 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
 import { RouterLink } from '@angular/router';
+
 import { Role } from '../../../interfaces/role';
 
 @Component({
   selector: 'app-user-add',
   standalone: true,
-  templateUrl: './user-add.component.html',
-  styleUrl: './user-add.component.css',
+  templateUrl: './product-add.component.html',
+  styleUrl: './product-add.component.css',
   imports: [
     FormsModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatSelectModule,
     MatButtonModule,
     MatIconModule,
-    MatInputModule,
-    MatSelectModule,
-    ReactiveFormsModule,
     RouterLink,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserAddComponent {
+export class ProductAddComponent {
+  idFormControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern('^[0-9]+$'),
+  ]);
+  codeFormControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern('^[a-zA-Z0-9]+$'),
+  ]);
   nameFormControl = new FormControl('', [
     Validators.required,
     Validators.pattern('^[a-zA-Z ]+$'),
   ]);
-  surnameFormControl = new FormControl('', [
+  descriptionFormControl = new FormControl('', [
     Validators.required,
-    Validators.pattern('^[a-zA-Z ]+$'),
+    Validators.maxLength(255),
   ]);
-  emailFormControl = new FormControl('', [
+  priceFormControl = new FormControl('', [
     Validators.required,
-    Validators.email,
+    Validators.pattern('^[0-9]+(\\.[0-9]{1,2})?$'),
   ]);
-  passwordFormControl = new FormControl('', [
+  stockFormControl = new FormControl('', [
     Validators.required,
-    Validators.min(5),
-    Validators.pattern(
-      '^[a-zA-Z0-9!@#$%^&*()_+\\-=\\[\\]{};\'":\\\\|,.<>\\/?]*$'
-    ),
+    Validators.pattern('^[0-9]+$'),
   ]);
+  categoryFormControl = new FormControl<Role | null>(null, Validators.required);
+  supplierFormControl = new FormControl<Role | null>(null, Validators.required);
+
   hide = signal(true);
   clickEvent(event: MouseEvent) {
     this.hide.set(!this.hide());
     event.stopPropagation();
   }
-  roleControl = new FormControl<Role | null>(null, Validators.required);
+
   roles: Role[] = [{ name: 'Administrador' }, { name: 'Vendedor' }];
 }

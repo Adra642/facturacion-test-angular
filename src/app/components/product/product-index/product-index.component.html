@@ -1,5 +1,5 @@
 <div class="index">
-  <h2 class="title">Índice de Usuarios</h2>
+  <h2 class="title">Índice de Productos</h2>
   <div>
     <div class="table-options">
       <mat-form-field>
@@ -30,7 +30,7 @@
           @if (column !== 'actions') {
           {{ element[column] }}
           } @else {
-          <a [routerLink]="['/user/edit', element.id]">
+          <a [routerLink]="['/product/edit', element.id]">
             <button class="edit" mat-icon-button aria-label="Editar registro">
               <mat-icon>edit</mat-icon>
             </button>
@@ -54,10 +54,15 @@
   </div>
 
   <div class="buttons">
-    <a routerLink="/user/add">
-      <button mat-fab extended [attr.aria-label]="'Añadir usuario'" class="add">
+    <a routerLink="/product/add">
+      <button
+        mat-fab
+        extended
+        [attr.aria-label]="'Añadir producto'"
+        class="add"
+      >
         <mat-icon>add</mat-icon>
-        Añadir usuario
+        Añadir producto
       </button>
     </a>
 

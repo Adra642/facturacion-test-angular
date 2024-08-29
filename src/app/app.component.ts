@@ -1,22 +1,22 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
+    MatButtonModule,
     MatFormFieldModule,
-    MatSidenavModule,
     MatIconModule,
+    MatSidenavModule,
     NavbarComponent,
     RouterLink,
     RouterOutlet,
-    MatButtonModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -24,7 +24,4 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 export class AppComponent {
   isLoggedIn = false;
   title = 'angular-front';
-  handleClick() {
-    console.log('Click en el padre');
-  }
 }

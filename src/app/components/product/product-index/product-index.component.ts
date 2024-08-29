@@ -5,38 +5,41 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
-import { User } from '../../../interfaces/user';
+import { Product } from '../../../interfaces/product';
 
-const ELEMENT_DATA: User[] = [
+const ELEMENT_DATA: Product[] = [
   {
     id: 1,
-    name: 'Juan',
-    surname: 'Pérez',
-    email: 'juan.perez@example.com',
-    password: '123456',
-    role: 'admin',
-    creationDate: new Date('2022-01-01'),
+    code: '001',
+    name: 'Producto A',
+    description: 'Descripción del Producto A',
+    price: 100.0,
+    stock: 50,
+    category: 'Categoría 1',
+    supplier: 'Proveedor X',
     state: true,
   },
   {
     id: 2,
-    name: 'María',
-    surname: 'Gómez',
-    email: 'maria.gomez@example.com',
-    password: 'abcdef',
-    role: 'vendedor',
-    creationDate: new Date('2022-02-01'),
+    code: '002',
+    name: 'Producto B',
+    description: 'Descripción del Producto B',
+    price: 150.0,
+    stock: 30,
+    category: 'Categoría 2',
+    supplier: 'Proveedor Y',
     state: true,
   },
   {
     id: 3,
-    name: 'Pedro',
-    surname: 'Rodríguez',
-    email: 'pedro.rodriguez@example.com',
-    password: '987654',
-    role: 'admin',
-    creationDate: new Date('2022-03-01'),
-    state: false,
+    code: '003',
+    name: 'Producto C',
+    description: 'Descripción del Producto C',
+    price: 200.0,
+    stock: 20,
+    category: 'Categoría 3',
+    supplier: 'Proveedor Z',
+    state: true,
   },
 ];
 @Component({
@@ -44,40 +47,40 @@ const ELEMENT_DATA: User[] = [
   standalone: true,
   imports: [
     MatButtonModule,
-    MatInputModule,
     MatIcon,
+    MatInputModule,
     MatPaginatorModule,
     MatTableModule,
     RouterLink,
   ],
-  templateUrl: './user-index.component.html',
-  styleUrl: './user-index.component.css',
+  templateUrl: './product-index.component.html',
+  styleUrl: './product-index.component.css',
 })
-export class UserIndexComponent {
+export class ProductIndexComponent {
   displayedColumns: string[] = [
     'id',
+    'code',
     'name',
-    'surname',
-    'email',
-    'password',
-    'role',
-    'creationDate',
+    'description',
+    'price',
+    'stock',
+    'category',
+    'supplier',
     'state',
     'actions',
   ];
-
   headerTitles: { [key: string]: string } = {
     id: 'Id',
+    code: 'Código',
     name: 'Nombre',
-    surname: 'Apellido',
-    email: 'Correo Electrónico',
-    password: 'Contraseña',
-    role: 'Rol',
-    creationDate: 'Fecha de Creación',
+    description: 'Descripción',
+    price: 'Precio',
+    stock: 'Stock',
+    category: 'Categoría',
+    supplier: 'Proveedor',
     state: 'Estado',
     actions: 'Acciones',
   };
-
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   applyFilter(event: Event) {
