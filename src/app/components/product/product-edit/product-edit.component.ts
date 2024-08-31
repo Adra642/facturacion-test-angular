@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormControl,
   Validators,
@@ -14,7 +14,7 @@ import { RouterLink } from '@angular/router';
 import { Role } from '../../../interfaces/role';
 
 @Component({
-  selector: 'app-user-edit',
+  selector: 'app-product-edit',
   standalone: true,
   templateUrl: './product-edit.component.html',
   styleUrl: './product-edit.component.css',
@@ -27,7 +27,6 @@ import { Role } from '../../../interfaces/role';
     MatIconModule,
     RouterLink,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductEditComponent {
   idFormControl = new FormControl('', [
@@ -63,11 +62,6 @@ export class ProductEditComponent {
     Validators.pattern('^[a-zA-Z ]+$'),
   ]);
 
-  hide = signal(true);
-  clickEvent(event: MouseEvent) {
-    this.hide.set(!this.hide());
-    event.stopPropagation();
-  }
   roleControl = new FormControl<Role | null>(null, Validators.required);
   roles: Role[] = [{ name: 'Administrador' }, { name: 'Vendedor' }];
 }

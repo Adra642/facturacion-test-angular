@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormControl,
   Validators,
@@ -10,11 +10,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { RouterLink } from '@angular/router';
-
 import { Role } from '../../../interfaces/role';
 
 @Component({
-  selector: 'app-user-add',
+  selector: 'app-product-add',
   standalone: true,
   templateUrl: './product-add.component.html',
   styleUrl: './product-add.component.css',
@@ -27,7 +26,6 @@ import { Role } from '../../../interfaces/role';
     MatIconModule,
     RouterLink,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductAddComponent {
   idFormControl = new FormControl('', [
@@ -56,12 +54,6 @@ export class ProductAddComponent {
   ]);
   categoryFormControl = new FormControl<Role | null>(null, Validators.required);
   supplierFormControl = new FormControl<Role | null>(null, Validators.required);
-
-  hide = signal(true);
-  clickEvent(event: MouseEvent) {
-    this.hide.set(!this.hide());
-    event.stopPropagation();
-  }
 
   roles: Role[] = [{ name: 'Administrador' }, { name: 'Vendedor' }];
 }

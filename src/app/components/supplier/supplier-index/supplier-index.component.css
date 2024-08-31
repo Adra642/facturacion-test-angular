@@ -1,0 +1,40 @@
+.index {
+  margin: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.table {
+  border: 1px solid black;
+}
+
+.title {
+  font-size: 1.5rem;
+}
+
+.buttons {
+  margin: 3rem;
+}
+
+.buttons > * {
+  margin: 1rem;
+}
+
+.table-options {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit {
+  color: #ffca1e;
+}
+
+.delete {
+  color: #c21414;
+}
+
+.add {
+  color: #ffffff;
+  background-color: #030370;
+}

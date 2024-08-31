@@ -17,7 +17,6 @@ const ELEMENT_DATA: Product[] = [
     stock: 50,
     category: 'Categoría 1',
     supplier: 'Proveedor X',
-    state: true,
   },
   {
     id: 2,
@@ -28,7 +27,6 @@ const ELEMENT_DATA: Product[] = [
     stock: 30,
     category: 'Categoría 2',
     supplier: 'Proveedor Y',
-    state: true,
   },
   {
     id: 3,
@@ -39,11 +37,10 @@ const ELEMENT_DATA: Product[] = [
     stock: 20,
     category: 'Categoría 3',
     supplier: 'Proveedor Z',
-    state: true,
   },
 ];
 @Component({
-  selector: 'app-index',
+  selector: 'app-product-index',
   standalone: true,
   imports: [
     MatButtonModule,
@@ -66,7 +63,6 @@ export class ProductIndexComponent {
     'stock',
     'category',
     'supplier',
-    'state',
     'actions',
   ];
   headerTitles: { [key: string]: string } = {
@@ -78,7 +74,6 @@ export class ProductIndexComponent {
     stock: 'Stock',
     category: 'Categoría',
     supplier: 'Proveedor',
-    state: 'Estado',
     actions: 'Acciones',
   };
   dataSource = new MatTableDataSource(ELEMENT_DATA);

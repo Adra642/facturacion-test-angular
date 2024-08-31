@@ -1,9 +1,8 @@
 export interface Supplier {
   id: number;
-  ruc: number;
+  ruc: string;
   name: string;
   email: string;
   phone: string;
   address: string;
-  state: boolean;
 }
