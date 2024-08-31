@@ -1,0 +1,76 @@
+<div class="index">
+  <h2 class="title">Índice de Categorías</h2>
+  <div>
+    <div class="table-options">
+      <mat-form-field>
+        <mat-label>Búsqueda</mat-label>
+        <input
+          matInput
+          (keyup)="applyFilter($event)"
+          placeholder="Contenido a filtrar"
+          #input
+        />
+      </mat-form-field>
+      <mat-paginator
+        [length]="100"
+        [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        showFirstLastButtons="true"
+        aria-label="Seleccionar página"
+      >
+      </mat-paginator>
+    </div>
+    <table mat-table [dataSource]="dataSource" class="table">
+      @for (column of displayedColumns; track column) {
+      <ng-container matColumnDef="{{ column }}">
+        <th mat-header-cell *matHeaderCellDef>
+          {{ headerTitles[column].toUpperCase() }}
+        </th>
+        <td mat-cell *matCellDef="let element">
+          @if (column !== 'actions') {
+          {{ element[column] }}
+          } @else {
+          <a [routerLink]="['/category/edit', element.id]">
+            <button class="edit" mat-icon-button aria-label="Editar registro">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </a>
+          <button
+            class="delete"
+            mat-icon-button
+            (click)="delete(element.id)"
+            aria-label="Eliminar registro"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+          }
+        </td>
+      </ng-container>
+      }
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+
+  <div class="buttons">
+    <a routerLink="/category/add">
+      <button
+        mat-fab
+        extended
+        [attr.aria-label]="'Añadir categoría'"
+        class="add"
+      >
+        <mat-icon>add</mat-icon>
+        Añadir Categoría
+      </button>
+    </a>
+
+    <a routerLink="/home">
+      <button mat-fab extended [attr.aria-label]="'Regresar'">
+        <mat-icon>keyboard_return</mat-icon>
+        Regresar
+      </button>
+    </a>
+  </div>
+</div>

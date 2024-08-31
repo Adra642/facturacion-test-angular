@@ -1,0 +1,24 @@
+<form class="edit-form">
+  <h2 class="title">Editar Categoría</h2>
+  <mat-form-field class="full-width">
+    <mat-label>Nombre</mat-label>
+    <input type="text" matInput [formControl]="nameFormControl" />
+    @if (nameFormControl.hasError('required')) {
+    <mat-error>El nombre es requerido</mat-error>
+    }
+  </mat-form-field>
+
+  <div class="buttons">
+    <button mat-fab extended [attr.aria-label]="'Editar usuario'" class="edit">
+      <mat-icon>edit</mat-icon>
+      Editar
+    </button>
+
+    <a routerLink="/category/index">
+      <button ngNoForm mat-fab extended [attr.aria-label]="'Cancelar registro'">
+        <mat-icon>close</mat-icon>
+        Cancelar
+      </button>
+    </a>
+  </div>
+</form>
