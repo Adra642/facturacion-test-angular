@@ -43,7 +43,7 @@ const ELEMENT_DATA: Product[] = [
   },
 ];
 @Component({
-  selector: 'app-index',
+  selector: 'app-product-index',
   standalone: true,
   imports: [
     MatButtonModule,

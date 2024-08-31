@@ -14,7 +14,7 @@ import { RouterLink } from '@angular/router';
 import { Role } from '../../../interfaces/role';
 
 @Component({
-  selector: 'app-user-edit',
+  selector: 'app-product-edit',
   standalone: true,
   templateUrl: './product-edit.component.html',
   styleUrl: './product-edit.component.css',

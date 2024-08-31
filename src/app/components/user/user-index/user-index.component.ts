@@ -40,7 +40,7 @@ const ELEMENT_DATA: User[] = [
   },
 ];
 @Component({
-  selector: 'app-index',
+  selector: 'app-user-index',
   standalone: true,
   imports: [
     MatButtonModule,
