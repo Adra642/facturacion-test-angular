@@ -5,77 +5,69 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
-import { Product } from '../../../interfaces/product';
+import { Supplier } from '../../../interfaces/supplier';
 
-const ELEMENT_DATA: Product[] = [
+const ELEMENT_DATA: Supplier[] = [
   {
     id: 1,
-    code: '001',
-    name: 'Producto A',
-    description: 'Descripción del Producto A',
-    price: 100.0,
-    stock: 50,
-    category: 'Categoría 1',
-    supplier: 'Proveedor X',
+    ruc: '12345678901',
+    name: 'Proveedor Uno',
+    email: 'proveedor1@example.com',
+    phone: '123-456-7890',
+    address: 'Calle Falsa 123',
   },
   {
     id: 2,
-    code: '002',
-    name: 'Producto B',
-    description: 'Descripción del Producto B',
-    price: 150.0,
-    stock: 30,
-    category: 'Categoría 2',
-    supplier: 'Proveedor Y',
+    ruc: '23456789012',
+    name: 'Proveedor Dos',
+    email: 'proveedor2@example.com',
+    phone: '234-567-8901',
+    address: 'Avenida 742',
   },
   {
     id: 3,
-    code: '003',
-    name: 'Producto C',
-    description: 'Descripción del Producto C',
-    price: 200.0,
-    stock: 20,
-    category: 'Categoría 3',
-    supplier: 'Proveedor Z',
+    ruc: '34567890123',
+    name: 'Proveedor Tres',
+    email: 'proveedor3@example.com',
+    phone: '345-678-9012',
+    address: 'Boulevard 456',
   },
 ];
 @Component({
-  selector: 'app-product-index',
+  selector: 'app-supplier-index',
   standalone: true,
   imports: [
     MatButtonModule,
-    MatIcon,
     MatInputModule,
+    MatIcon,
     MatPaginatorModule,
     MatTableModule,
     RouterLink,
   ],
-  templateUrl: './product-index.component.html',
-  styleUrl: './product-index.component.css',
+  templateUrl: './supplier-index.component.html',
+  styleUrl: './supplier-index.component.css',
 })
-export class ProductIndexComponent {
+export class SupplierIndexComponent {
   displayedColumns: string[] = [
     'id',
-    'code',
+    'ruc',
     'name',
-    'description',
-    'price',
-    'stock',
-    'category',
-    'supplier',
+    'email',
+    'phone',
+    'address',
     'actions',
   ];
+
   headerTitles: { [key: string]: string } = {
     id: 'Id',
-    code: 'Código',
+    ruc: 'RUC',
     name: 'Nombre',
-    description: 'Descripción',
-    price: 'Precio',
-    stock: 'Stock',
-    category: 'Categoría',
-    supplier: 'Proveedor',
+    email: 'Correo Electrónico',
+    phone: 'Teléfono',
+    address: 'Dirección',
     actions: 'Acciones',
   };
+
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   applyFilter(event: Event) {

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormControl,
   Validators,
@@ -25,7 +25,6 @@ import { RouterLink } from '@angular/router';
     ReactiveFormsModule,
     RouterLink,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryEditComponent {
   categoryId: string = '';
@@ -55,10 +54,4 @@ export class CategoryEditComponent {
     Validators.required,
     Validators.pattern('^[a-zA-Z ]+$'),
   ]);
-
-  hide = signal(true);
-  clickEvent(event: MouseEvent) {
-    this.hide.set(!this.hide());
-    event.stopPropagation();
-  }
 }
