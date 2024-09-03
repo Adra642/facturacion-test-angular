@@ -1,1 +1,119 @@
-<p>invoice-edit works!</p>
+<form class="edit-form">
+    <h2 class="title">Editar Factura</h2>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Número de Factura</mat-label>
+      <input type="text" matInput [formControl]="invoiceNumberFormControl" />
+      @if (invoiceNumberFormControl.hasError('required')) {
+        <mat-error>El número de factura es requerido</mat-error>
+      }
+      @if (invoiceNumberFormControl.hasError('pattern')) {
+        <mat-error>Ingrese un número de factura válido</mat-error>
+      }
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Fecha de Emisión</mat-label>
+      <input type="date" matInput [formControl]="issueDateFormControl" />
+      @if (issueDateFormControl.hasError('required')) {
+        <mat-error>La fecha de emisión es requerida</mat-error>
+      }
+      @if (issueDateFormControl.hasError('pattern')) {
+        <mat-error>Ingrese una fecha de emisión válida (YYYY-MM-DD)</mat-error>
+      }
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Nombre del Cliente</mat-label>
+      <input type="text" matInput [formControl]="userNameFormControl" />
+      @if (userNameFormControl.hasError('required')) {
+        <mat-error>El nombre del cliente es requerido</mat-error>
+      }
+      @if (userNameFormControl.hasError('pattern')) {
+        <mat-error>Ingrese un nombre de cliente válido</mat-error>
+      }
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Subtotal</mat-label>
+      <input type="text" matInput [formControl]="subtotalFormControl" />
+      @if (subtotalFormControl.hasError('required')) {
+        <mat-error>El subtotal es requerido</mat-error>
+      }
+      @if (subtotalFormControl.hasError('pattern')) {
+        <mat-error>Ingrese un subtotal válido</mat-error>
+      }
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Impuesto</mat-label>
+      <input type="text" matInput [formControl]="taxFormControl" />
+      @if (taxFormControl.hasError('required')) {
+        <mat-error>El impuesto es requerido</mat-error>
+      }
+      @if (taxFormControl.hasError('pattern')) {
+        <mat-error>Ingrese un impuesto válido</mat-error>
+      }
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Total</mat-label>
+      <input type="text" matInput [formControl]="totalFormControl" />
+      @if (totalFormControl.hasError('required')) {
+        <mat-error>El total es requerido</mat-error>
+      }
+      @if (totalFormControl.hasError('pattern')) {
+        <mat-error>Ingrese un total válido</mat-error>
+      }
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Descuento</mat-label>
+      <input type="text" matInput [formControl]="discountFormControl" />
+      @if (discountFormControl.hasError('required')) {
+        <mat-error>El descuento es requerido</mat-error>
+      }
+      @if (discountFormControl.hasError('pattern')) {
+        <mat-error>Ingrese un descuento válido</mat-error>
+      }
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Método de Pago</mat-label>
+      <input type="text" matInput [formControl]="paymentMethodFormControl" />
+      @if (paymentMethodFormControl.hasError('required')) {
+        <mat-error>El método de pago es requerido</mat-error>
+      }
+      @if (paymentMethodFormControl.hasError('pattern')) {
+        <mat-error>Ingrese un método de pago válido</mat-error>
+      }
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Estado</mat-label>
+      <input type="checkbox" matInput [formControl]="statusFormControl" />
+      @if (statusFormControl.hasError('required')) {
+        <mat-error>El estado es requerido</mat-error>
+      }
+    </mat-form-field>
+  
+    <div class="buttons">
+      <button
+        mat-fab
+        extended
+        [attr.aria-label]="'Registrar Factura'"
+        class="edit"
+      >
+        <mat-icon>edit</mat-icon>
+        Editar
+      </button>
+  
+      <a routerLink="/invoice/index">
+        <button ngNoForm mat-fab extended [attr.aria-label]="'Cancelar registro'">
+          <mat-icon>close</mat-icon>
+          Cancelar
+        </button>
+      </a>
+    </div>
+  </form>
+  
