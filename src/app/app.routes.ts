@@ -2,25 +2,25 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 
-import { UserAddComponent } from './components/user/user-add/user-add.component';
-import { UserIndexComponent } from './components/user/user-index/user-index.component';
-import { UserEditComponent } from './components/user/user-edit/user-edit.component';
+import { UserAddComponent } from './components/add/user-add/user-add.component';
+import { UserIndexComponent } from './components/index/user-index/user-index.component';
+import { UserEditComponent } from './components/edit/user-edit/user-edit.component';
 
-import { ProductIndexComponent } from './components/product/product-index/product-index.component';
-import { ProductAddComponent } from './components/product/product-add/product-add.component';
-import { ProductEditComponent } from './components/product/product-edit/product-edit.component';
+import { ProductIndexComponent } from './components/index/product-index/product-index.component';
+import { ProductAddComponent } from './components/add/product-add/product-add.component';
+import { ProductEditComponent } from './components/edit/product-edit/product-edit.component';
 
-import { CategoryIndexComponent } from './components/category/category-index/category-index.component';
-import { CategoryAddComponent } from './components/category/category-add/category-add.component';
-import { CategoryEditComponent } from './components/category/category-edit/category-edit.component';
+import { CategoryIndexComponent } from './components/index/category-index/category-index.component';
+import { CategoryAddComponent } from './components/add/category-add/category-add.component';
+import { CategoryEditComponent } from './components/edit/category-edit/category-edit.component';
 
-import { SupplierIndexComponent } from './components/supplier/supplier-index/supplier-index.component';
-import { SupplierAddComponent } from './components/supplier/supplier-add/supplier-add.component';
-import { SupplierEditComponent } from './components/supplier/supplier-edit/supplier-edit.component';
+import { SupplierIndexComponent } from './components/index/supplier-index/supplier-index.component';
+import { SupplierAddComponent } from './components/add/supplier-add/supplier-add.component';
+import { SupplierEditComponent } from './components/edit/supplier-edit/supplier-edit.component';
 
-import { InvoiceIndexComponent } from './components/invoice/invoice-index/invoice-index.component';
-import { InvoiceAddComponent } from './components/invoice/invoice-add/invoice-add.component';
-import { InvoiceEditComponent } from './components/invoice/invoice-edit/invoice-edit.component';
+import { InvoiceIndexComponent } from './components/index/invoice-index/invoice-index.component';
+import { InvoiceAddComponent } from './components/add/invoice-add/invoice-add.component';
+import { InvoiceEditComponent } from './components/edit/invoice-edit/invoice-edit.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, title: 'Login' },
