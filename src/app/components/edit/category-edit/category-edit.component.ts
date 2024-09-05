@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
-  FormGroup,
   FormControl,
-  Validators,
+  FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -73,12 +73,12 @@ export class CategoryEditComponent implements OnInit {
 
   async editCategory() {
     if (this.categoryForm.valid) {
-      const newCategory: Category = {
+      const category: Category = {
         id: this.categoryId,
         name: this.categoryForm.value.name!,
       };
       try {
-        await firstValueFrom(this.categoryService.addCategory(newCategory));
+        await firstValueFrom(this.categoryService.addCategory(category));
         console.log('Category edited');
         this.router.navigate(['/category/index']);
       } catch (error) {

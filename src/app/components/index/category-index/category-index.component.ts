@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
@@ -32,6 +32,10 @@ export class CategoryIndexComponent implements OnInit {
   };
 
   dataSource = new MatTableDataSource<any>([]);
+  allCategories: any[] = [];
+  totalItems = 0;
+  pageSize = 5;
+  currentPage = 0;
 
   constructor(
     private categoryService: CategoryService,
@@ -40,8 +44,22 @@ export class CategoryIndexComponent implements OnInit {
 
   ngOnInit(): void {
     this.categoryService.getAllCategories().subscribe((data) => {
-      this.dataSource.data = data;
+      this.allCategories = data;
+      this.totalItems = data.length;
+      this.updateDataSource();
     });
+  }
+
+  updateDataSource(): void {
+    const startIndex = this.currentPage * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.dataSource.data = this.allCategories.slice(startIndex, endIndex);
+  }
+
+  pageEvent(event: PageEvent): void {
+    this.pageSize = event.pageSize;
+    this.currentPage = event.pageIndex;
+    this.updateDataSource();
   }
 
   delete(id: number) {
@@ -50,21 +68,23 @@ export class CategoryIndexComponent implements OnInit {
       .subscribe({
         next: (response) => {
           console.log(response);
-          this.dataSource.data = this.dataSource.data.filter(
+          this.allCategories = this.allCategories.filter(
             (item) => item.id !== id
           );
+          this.totalItems = this.allCategories.length;
+          this.updateDataSource();
         },
         error: (error) => {
           console.error('Error deleting category:', error);
           this.snackBar.open(
-            'No se puede eliminar el registro debido a que pertenece a otra entidad',
+            'No se puede eliminar la categoría debido a que esta relacionado a otra entidad',
             'Cerrar',
             { duration: 5000 }
           );
         },
         complete: () => {
           this.snackBar.open(
-            'El elemento fue eliminado correctamente',
+            'La categoría fue eliminado correctamente',
             'Cerrar',
             { duration: 5000 }
           );
