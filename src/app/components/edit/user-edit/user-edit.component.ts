@@ -11,8 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { Role } from '../../../interfaces/role';
 import { UserService } from '../../../services/user.service';
-import { ActivatedRoute } from '@angular/router';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-user-edit',
