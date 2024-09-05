@@ -1,15 +1,21 @@
-<form class="edit-form">
+<form [formGroup]="categoryForm" (ngSubmit)="editCategory()" class="edit-form">
   <h2 class="title">Editar Categoría</h2>
   <mat-form-field class="full-width">
     <mat-label>Nombre</mat-label>
-    <input type="text" matInput [formControl]="nameFormControl" />
-    @if (nameFormControl.hasError('required')) {
+    <input type="text" matInput formControlName="name" />
+    @if (categoryForm.get("name")?.hasError('required')) {
     <mat-error>El nombre es requerido</mat-error>
     }
   </mat-form-field>
 
   <div class="buttons">
-    <button mat-fab extended [attr.aria-label]="'Editar usuario'" class="edit">
+    <button
+      mat-fab
+      extended
+      [attr.aria-label]="'Editar usuario'"
+      type="submit"
+      class="edit"
+    >
       <mat-icon>edit</mat-icon>
       Editar
     </button>

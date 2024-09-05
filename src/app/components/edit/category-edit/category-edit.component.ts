@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
+  FormBuilder,
+  FormGroup,
   FormControl,
   Validators,
   FormsModule,
@@ -9,8 +11,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { CategoryService } from '../../../services/category.service';
-import { ActivatedRoute } from '@angular/router';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Category } from '../../../interfaces/category';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-category-edit',
@@ -26,32 +29,63 @@ import { RouterLink } from '@angular/router';
     RouterLink,
   ],
 })
-export class CategoryEditComponent {
-  categoryId: string = '';
-  category: any;
+export class CategoryEditComponent implements OnInit {
+  categoryId: number;
+  categoryForm = new FormGroup({
+    name: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[a-zA-Z ]+$'),
+    ]),
+  });
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
+    private fb: FormBuilder,
     private categoryService: CategoryService
-  ) {}
+  ) {
+    this.categoryId = Number(this.route.snapshot.paramMap.get('id'));
+    this.categoryForm = this.fb.group({
+      name: [''],
+    });
+  }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.categoryId = id;
-      this.loadCategory();
+    if (this.categoryId) {
+      this.getCategory(this.categoryId);
     } else {
-      // Manejar el caso donde el ID no está presente en la URL
       console.error('No ID found in the URL');
     }
   }
 
-  loadCategory(): void {
-    //TODO
+  getCategory(id: number) {
+    this.categoryService.getCategory(id).subscribe({
+      next: (category: any) => {
+        this.categoryForm.patchValue({
+          name: category.name,
+        });
+      },
+      error: (error) => {
+        console.error('Error loading category:', error);
+      },
+    });
   }
 
-  nameFormControl = new FormControl('', [
-    Validators.required,
-    Validators.pattern('^[a-zA-Z ]+$'),
-  ]);
+  async editCategory() {
+    if (this.categoryForm.valid) {
+      const newCategory: Category = {
+        id: this.categoryId,
+        name: this.categoryForm.value.name!,
+      };
+      try {
+        const category = await firstValueFrom(
+          this.categoryService.addCategory(newCategory)
+        );
+        console.log('Category edited');
+        this.router.navigate(['/category/index']);
+      } catch (error) {
+        console.error('Error editing category:', error);
+      }
+    }
+  }
 }
