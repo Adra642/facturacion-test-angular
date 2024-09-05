@@ -48,9 +48,7 @@ export class CategoryAddComponent {
       };
 
       try {
-        const category = await firstValueFrom(
-          this.categoryService.addCategory(newCategory)
-        );
+        await firstValueFrom(this.categoryService.addCategory(newCategory));
         console.log('Category added');
         this.router.navigate(['/category/index']);
       } catch (error) {

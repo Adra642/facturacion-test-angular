@@ -78,9 +78,7 @@ export class CategoryEditComponent implements OnInit {
         name: this.categoryForm.value.name!,
       };
       try {
-        const category = await firstValueFrom(
-          this.categoryService.addCategory(newCategory)
-        );
+        await firstValueFrom(this.categoryService.addCategory(newCategory));
         console.log('Category edited');
         this.router.navigate(['/category/index']);
       } catch (error) {
