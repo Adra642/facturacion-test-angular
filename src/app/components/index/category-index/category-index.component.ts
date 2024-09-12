@@ -67,7 +67,6 @@ export class CategoryIndexComponent implements OnInit {
       .deleteCategory(id, { responseType: 'text' })
       .subscribe({
         next: (response) => {
-          console.log(response);
           this.allCategories = this.allCategories.filter(
             (item) => item.id !== id
           );

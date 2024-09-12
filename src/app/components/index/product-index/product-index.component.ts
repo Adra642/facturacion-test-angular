@@ -60,7 +60,6 @@ export class ProductIndexComponent {
       this.allProducts = data;
       this.totalItems = data.length;
       this.updateDataSource();
-      console.log(this.dataSource.data);
     });
   }
 
