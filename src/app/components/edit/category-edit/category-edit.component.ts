@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
@@ -31,12 +30,7 @@ import { firstValueFrom } from 'rxjs';
 })
 export class CategoryEditComponent implements OnInit {
   categoryId: number;
-  categoryForm = new FormGroup({
-    name: new FormControl('', [
-      Validators.required,
-      Validators.pattern('^[a-zA-Z ]+$'),
-    ]),
-  });
+  categoryForm: FormGroup;
 
   constructor(
     private router: Router,
@@ -46,7 +40,7 @@ export class CategoryEditComponent implements OnInit {
   ) {
     this.categoryId = Number(this.route.snapshot.paramMap.get('id'));
     this.categoryForm = this.fb.group({
-      name: [''],
+      name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
     });
   }
 
@@ -78,7 +72,7 @@ export class CategoryEditComponent implements OnInit {
         name: this.categoryForm.value.name!,
       };
       try {
-        await firstValueFrom(this.categoryService.addCategory(category));
+        await firstValueFrom(this.categoryService.editCategory(category));
         console.log('Category edited');
         this.router.navigate(['/category/index']);
       } catch (error) {

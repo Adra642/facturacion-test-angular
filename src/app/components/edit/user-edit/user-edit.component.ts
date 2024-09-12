@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
-  FormControl,
   Validators,
   FormsModule,
   ReactiveFormsModule,
@@ -35,41 +34,31 @@ import { firstValueFrom } from 'rxjs';
 })
 export class UserEditComponent {
   userId: number;
-  userForm = new FormGroup({
-    name: new FormControl('', [
-      Validators.required,
-      Validators.pattern('^[a-zA-Z ]+$'),
-    ]),
-    surname: new FormControl('', [
-      Validators.required,
-      Validators.pattern('^[a-zA-Z ]+$'),
-    ]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.min(5),
-      Validators.pattern(
-        '^[a-zA-Z0-9!@#$%^&*()_+\\-=\\[\\]{};\'":\\\\|,.<>\\/?]*$'
-      ),
-    ]),
-    state: new FormControl<boolean>(true, Validators.required),
-    role: new FormControl<number>(0, Validators.required),
-  });
+  userForm: FormGroup;
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private fb: FormBuilder,
+    private route: ActivatedRoute,
     private userService: UserService
   ) {
     this.userId = Number(this.route.snapshot.paramMap.get('id'));
     this.userForm = this.fb.group({
-      name: [''],
-      surname: [''],
-      email: [''],
-      password: [''],
-      state: [true],
-      role: [0],
+      name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
+      surname: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]],
+      email: ['', [Validators.required, Validators.email]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.min(5),
+          Validators.pattern(
+            '^[a-zA-Z0-9!@#$%^&*()_+\\-=\\[\\]{};\'":\\\\|,.<>\\/?]*$'
+          ),
+        ],
+      ],
+      state: [true, Validators.required],
+      role: [0, Validators.required],
     });
   }
 
@@ -90,7 +79,7 @@ export class UserEditComponent {
           email: user.email,
           password: user.password,
           state: user.state,
-          role: user.role,
+          role: user.role.id,
         });
       },
       error: (error) => {

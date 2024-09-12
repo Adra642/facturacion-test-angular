@@ -34,25 +34,7 @@ import { firstValueFrom } from 'rxjs';
 })
 export class SupplierEditComponent {
   supplierId: number;
-  supplierForm = new FormGroup({
-    ruc: new FormControl('', [
-      Validators.required,
-      Validators.pattern('^[0-9]{11}$'),
-    ]),
-    name: new FormControl('', [
-      Validators.required,
-      Validators.pattern('^[a-zA-Z0-9 #%&*(),.":]+$'),
-    ]),
-    phone: new FormControl('', [
-      Validators.required,
-      Validators.pattern('^[0-9]{9}$'),
-    ]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    address: new FormControl('', [
-      Validators.required,
-      Validators.pattern('^[a-zA-Z0-9 ,.-/#]+$'),
-    ]),
-  });
+  supplierForm: FormGroup;
 
   constructor(
     private router: Router,
@@ -62,11 +44,17 @@ export class SupplierEditComponent {
   ) {
     this.supplierId = Number(this.route.snapshot.paramMap.get('id'));
     this.supplierForm = this.fb.group({
-      ruc: [''],
-      name: [''],
-      email: [''],
-      phone: [''],
-      address: [''],
+      ruc: ['', [Validators.required, Validators.pattern('^[0-9]{11}$')]],
+      name: [
+        '',
+        [Validators.required, Validators.pattern('^[a-zA-Z0-9 #%&*(),.":]+$')],
+      ],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]{9}$')]],
+      email: ['', [Validators.required, Validators.email]],
+      address: [
+        '',
+        [Validators.required, Validators.pattern('^[a-zA-Z0-9 ,.-/#]+$')],
+      ],
     });
   }
 
@@ -106,7 +94,7 @@ export class SupplierEditComponent {
         address: this.supplierForm.value.address!,
       };
       try {
-        await firstValueFrom(this.supplierService.addSupplier(supplier));
+        await firstValueFrom(this.supplierService.editSupplier(supplier));
         console.log('Supplier edited');
         this.router.navigate(['/supplier/index']);
       } catch (error) {
