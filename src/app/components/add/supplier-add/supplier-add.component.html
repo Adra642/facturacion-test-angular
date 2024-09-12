@@ -1,15 +1,17 @@
-<form class="add-form">
+<form [formGroup]="supplierForm" (ngSubmit)="addSupplier()" class="add-form">
   <h2 class="title">Registrar Proveedor</h2>
   <mat-form-field class="full-width">
     <mat-label>RUC</mat-label>
     <input
       type="text"
       matInput
-      [formControl]="rucFormControl"
+      formControlName="ruc"
       placeholder="Ex. 20601234187"
     />
-    @if (rucFormControl.hasError('required')) {
+    @if (supplierForm.get("ruc")?.hasError('required')) {
     <mat-error>El RUC es requerido</mat-error>
+    } @if (supplierForm.get("ruc")?.hasError('pattern')) {
+    <mat-error>El RUC debe tener 11 dígitos</mat-error>
     }
   </mat-form-field>
 
@@ -18,10 +20,10 @@
     <input
       type="text"
       matInput
-      [formControl]="nameFormControl"
+      formControlName="name"
       placeholder="Ex. Corporación 1"
     />
-    @if (nameFormControl.hasError('required')) {
+    @if (supplierForm.get("name")?.hasError('required')) {
     <mat-error>El nombre es requerido</mat-error>
     }
   </mat-form-field>
@@ -31,12 +33,12 @@
     <input
       type="email"
       matInput
-      [formControl]="emailFormControl"
+      formControlName="email"
       placeholder="Ex. mail@example.com"
     />
-    @if (emailFormControl.hasError('email')) {
+    @if (supplierForm.get("email")?.hasError('email')) {
     <mat-error>Ingrese una dirección de correo valida</mat-error>
-    } @if (emailFormControl.hasError('required')) {
+    } @if (supplierForm.get("email")?.hasError('required')) {
     <mat-error>El email es requerido</mat-error>
     }
   </mat-form-field>
@@ -46,12 +48,12 @@
     <input
       type="tel"
       matInput
-      [formControl]="telephoneFormControl"
+      formControlName="phone"
       placeholder="Ex. 947123496"
     />
-    @if (telephoneFormControl.hasError('pattern')) {
+    @if (supplierForm.get("phone")?.hasError('pattern')) {
     <mat-error>Ingrese un teléfono valido</mat-error>
-    } @if (telephoneFormControl.hasError('required')) {
+    } @if (supplierForm.get("phone")?.hasError('required')) {
     <mat-error>El teléfono es requerido</mat-error>
     }
   </mat-form-field>
@@ -61,10 +63,10 @@
     <input
       type="text"
       matInput
-      [formControl]="addressFormControl"
+      formControlName="address"
       placeholder="Ex. Avenida 123"
     />
-    @if (addressFormControl.hasError('required')) {
+    @if (supplierForm.get("address")?.hasError('required')) {
     <mat-error>La dirección es requerida</mat-error>
     }
   </mat-form-field>
@@ -75,6 +77,7 @@
       extended
       [attr.aria-label]="'Registrar Proveedor'"
       class="add"
+      type="submit"
     >
       <mat-icon>add</mat-icon>
       Registrar

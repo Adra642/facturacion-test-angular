@@ -2,43 +2,12 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
-import { User } from '../../../interfaces/user';
+import { UserService } from '../../../services/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
-const ELEMENT_DATA: User[] = [
-  {
-    id: 1,
-    name: 'Juan',
-    surname: 'Pérez',
-    email: 'juan.perez@example.com',
-    password: '123456',
-    role: 'admin',
-    creationDate: new Date('2022-01-01'),
-    state: true,
-  },
-  {
-    id: 2,
-    name: 'María',
-    surname: 'Gómez',
-    email: 'maria.gomez@example.com',
-    password: 'abcdef',
-    role: 'vendedor',
-    creationDate: new Date('2022-02-01'),
-    state: true,
-  },
-  {
-    id: 3,
-    name: 'Pedro',
-    surname: 'Rodríguez',
-    email: 'pedro.rodriguez@example.com',
-    password: '987654',
-    role: 'admin',
-    creationDate: new Date('2022-03-01'),
-    state: false,
-  },
-];
 @Component({
   selector: 'app-user-index',
   standalone: true,
@@ -78,15 +47,61 @@ export class UserIndexComponent {
     actions: 'Acciones',
   };
 
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<any>([]);
+  allUsers: any[] = [];
+  totalItems = 0;
+  pageSize = 5;
+  currentPage = 0;
+
+  constructor(
+    private userService: UserService,
+    private snackBar: MatSnackBar
+  ) {}
+  ngOnInit(): void {
+    this.userService.getAllUsers().subscribe((data) => {
+      this.allUsers = data;
+      this.totalItems = data.length;
+      this.updateDataSource();
+    });
+  }
+
+  updateDataSource(): void {
+    const startIndex = this.currentPage * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.dataSource.data = this.allUsers.slice(startIndex, endIndex);
+  }
+
+  pageEvent(event: PageEvent): void {
+    this.pageSize = event.pageSize;
+    this.currentPage = event.pageIndex;
+    this.updateDataSource();
+  }
+
+  delete(id: number) {
+    this.userService.deleteUser(id, { responseType: 'text' }).subscribe({
+      next: (response) => {
+        this.allUsers = this.allUsers.filter((item) => item.id !== id);
+        this.totalItems = this.allUsers.length;
+        this.updateDataSource();
+      },
+      error: (error) => {
+        console.error('Error deleting category:', error);
+        this.snackBar.open(
+          'No se puede eliminar el usuario debido a que esta relacionado a otra entidad',
+          'Cerrar',
+          { duration: 5000 }
+        );
+      },
+      complete: () => {
+        this.snackBar.open('El usuario fue eliminado correctamente', 'Cerrar', {
+          duration: 5000,
+        });
+      },
+    });
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  delete(id: number) {
-    // Lógica para eliminar el registro con el ID proporcionado
-    console.log('Delete ID:', id);
   }
 }
