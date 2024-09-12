@@ -51,7 +51,7 @@ export class UserAddComponent {
       ),
     ]),
     state: new FormControl<boolean>(true, Validators.required),
-    role: new FormControl<number>(0, Validators.required),
+    role: new FormControl<number>(0, [Validators.required, Validators.min(1)]),
   });
 
   hide = signal(true);
@@ -74,8 +74,6 @@ export class UserAddComponent {
         },
         state: this.userForm.value.state!,
       };
-
-      console.log(newUser);
       try {
         await firstValueFrom(this.userService.addUser(newUser));
         console.log('User added');

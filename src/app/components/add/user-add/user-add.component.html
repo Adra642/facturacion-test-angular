@@ -60,7 +60,6 @@
   <mat-form-field class="full-width">
     <mat-label>Rol del Usuario</mat-label>
     <mat-select formControlName="role" required>
-      <mat-option>--</mat-option>
       @for (role of roles; track role) {
       <mat-option [value]="role.id">{{ role.name }}</mat-option>
       }
@@ -73,7 +72,6 @@
   <mat-form-field class="full-width">
     <mat-label>Estado</mat-label>
     <mat-select formControlName="state" required>
-      <mat-option>--</mat-option>
       <mat-option [value]="true">Activo</mat-option>
       <mat-option [value]="false">Inactivo</mat-option>
     </mat-select>
