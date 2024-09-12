@@ -1,44 +1,13 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
-import { Product } from '../../../interfaces/product';
+import { ProductService } from '../../../services/product.service';
 
-const ELEMENT_DATA: Product[] = [
-  {
-    id: 1,
-    code: '001',
-    name: 'Producto A',
-    description: 'Descripción del Producto A',
-    price: 100.0,
-    stock: 50,
-    category: 'Categoría 1',
-    supplier: 'Proveedor X',
-  },
-  {
-    id: 2,
-    code: '002',
-    name: 'Producto B',
-    description: 'Descripción del Producto B',
-    price: 150.0,
-    stock: 30,
-    category: 'Categoría 2',
-    supplier: 'Proveedor Y',
-  },
-  {
-    id: 3,
-    code: '003',
-    name: 'Producto C',
-    description: 'Descripción del Producto C',
-    price: 200.0,
-    stock: 20,
-    category: 'Categoría 3',
-    supplier: 'Proveedor Z',
-  },
-];
 @Component({
   selector: 'app-product-index',
   standalone: true,
@@ -76,15 +45,66 @@ export class ProductIndexComponent {
     supplier: 'Proveedor',
     actions: 'Acciones',
   };
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<any>([]);
+  allProducts: any[] = [];
+  totalItems = 0;
+  pageSize = 5;
+  currentPage = 0;
+
+  constructor(
+    private productService: ProductService,
+    private snackBar: MatSnackBar
+  ) {}
+  ngOnInit(): void {
+    this.productService.getAllProducts().subscribe((data) => {
+      this.allProducts = data;
+      this.totalItems = data.length;
+      this.updateDataSource();
+      console.log(this.dataSource.data);
+    });
+  }
+
+  updateDataSource(): void {
+    const startIndex = this.currentPage * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.dataSource.data = this.allProducts.slice(startIndex, endIndex);
+  }
+
+  pageEvent(event: PageEvent): void {
+    this.pageSize = event.pageSize;
+    this.currentPage = event.pageIndex;
+    this.updateDataSource();
+  }
+
+  delete(id: number) {
+    this.productService.deleteProduct(id, { responseType: 'text' }).subscribe({
+      next: (response) => {
+        this.allProducts = this.allProducts.filter((item) => item.id !== id);
+        this.totalItems = this.allProducts.length;
+        this.updateDataSource();
+      },
+      error: (error) => {
+        console.error('Error deleting product:', error);
+        this.snackBar.open(
+          'No se puede eliminar el producto debido a que esta relacionado a otra entidad',
+          'Cerrar',
+          { duration: 5000 }
+        );
+      },
+      complete: () => {
+        this.snackBar.open(
+          'El producto fue eliminado correctamente',
+          'Cerrar',
+          {
+            duration: 5000,
+          }
+        );
+      },
+    });
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  delete(id: number) {
-    // Lógica para eliminar el registro con el ID proporcionado
-    console.log('Delete ID:', id);
   }
 }
